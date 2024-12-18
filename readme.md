@@ -22,7 +22,7 @@
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone <URL_ВАШЕГО_РЕПОЗИТОРИЯ>
+   git clone https://github.com/psajd/gbuz/
     ```
 2. **Соберите JAR-файл с помощью Maven:**
     ```bash
