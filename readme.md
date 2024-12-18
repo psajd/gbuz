@@ -24,16 +24,12 @@
    ```bash
    git clone <URL_ВАШЕГО_РЕПОЗИТОРИЯ>
     ```
-2. **Поднимите базу данных в докере, либо используйте готовое соединение изменив параметры в `compose.yaml`**
-   ```bash
-    docker-compose up db
-   ```
-3. **Соберите JAR-файл с помощью Maven:**
+2. **Соберите JAR-файл с помощью Maven:**
     ```bash
-    ./mvnw.cmd clean package
+    ./mvnw clean package -DskipTests
     ```
 
-4. Поднимите приложение в докер контейнере
+3. Поднимите приложение в докер контейнере
    ```bash
     docker-compose up -d
    ```
