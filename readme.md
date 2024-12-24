@@ -1,7 +1,7 @@
-# Spring Boot + PostgreSQL Dockerized Application
+# Certificate med app
 
 Это приложение на базе Spring Boot и PostgreSQL, которое можно запускать в Docker-контейнерах. Приложение разработано с
-использованием Java 21 (Amazon Corretto).
+использованием Java 17 (Amazon Corretto).
 
 ## Содержание
 
@@ -38,7 +38,7 @@
 ## Использование
 
 - API-приложения доступно по адресу http://localhost:8080.
-Конкретные эндпоинты зависят от реализации вашего приложения.
+Также можно воспользоваться [Swagger-ui](http://localhost:8080/swagger-ui/index.html#/)
 - PostgreSQL работает на порту 5432.
 Вы можете подключиться к базе данных с помощью настроек, указанных в файле docker-compose.yml:
   * Имя пользователя: your_username
