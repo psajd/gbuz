@@ -42,9 +42,11 @@ public class CertificateService {
     }
 
     public List<Certificate> searchCertificates(Long employeeId, LocalDate startDate, LocalDate endDate) {
-        return certificateRepository.findAll().stream().filter(x -> (Objects.equals(x.getEmployee().getId(), employeeId))
-                && Objects.equals(x.getIssueDate(), startDate)
-                && Objects.equals(x.getExpirationDate(), endDate)
-        ).toList();
+        return certificateRepository.findAll().stream()
+                .filter(certificate -> (employeeId == null || Objects.equals(certificate.getEmployee().getId(), employeeId)))
+                .filter(certificate -> (startDate == null || certificate.getIssueDate().isEqual(startDate)))
+                .filter(certificate -> (endDate == null || certificate.getExpirationDate().isEqual(endDate)))
+                .toList();
     }
+
 }

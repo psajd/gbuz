@@ -17,7 +17,7 @@ VALUES (1, '2024-12-01', '2025-12-01', 'password123'),
        (3, '2024-12-03', '2025-12-03', 'key789');
 
 -- Добавляем выдачу ключей
-INSERT INTO key_assignment (issuance_date, certificate_id, key_card_id)
+INSERT INTO key_assignment (assignment_date, certificate_id, key_card_id)
 VALUES ('2024-12-10', 1, 1),
        ('2024-12-11', 2, 2),
        ('2024-12-12', 3, 3);
