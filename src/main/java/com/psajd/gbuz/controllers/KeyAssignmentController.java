@@ -1,6 +1,7 @@
 package com.psajd.gbuz.controllers;
 
 import com.psajd.gbuz.entities.KeyAssignment;
+import com.psajd.gbuz.services.DocumentService;
 import com.psajd.gbuz.services.KeyAssignmentService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,11 @@ import java.util.Optional;
 public class KeyAssignmentController {
 
     private final KeyAssignmentService keyAssignmentService;
+    private final DocumentService documentService;
 
-    public KeyAssignmentController(KeyAssignmentService keyAssignmentService) {
+    public KeyAssignmentController(KeyAssignmentService keyAssignmentService, DocumentService documentService) {
         this.keyAssignmentService = keyAssignmentService;
+        this.documentService = documentService;
     }
 
     @GetMapping
@@ -69,7 +72,7 @@ public class KeyAssignmentController {
         if (keyAssignment.isPresent()) {
             KeyAssignment assignment = keyAssignment.get();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            return keyAssignmentService.createDocx(id, assignment, formatter);
+            return documentService.keyAssignmentDocument(id, assignment, formatter);
         } else {
             return ResponseEntity.notFound().build();
         }
