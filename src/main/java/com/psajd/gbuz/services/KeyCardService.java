@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class KeyCardService {
+public class KeyCardService extends KeyCard {
     private final KeyCardRepository keyCardRepository;
 
     public KeyCardService(KeyCardRepository keyCardRepository) {

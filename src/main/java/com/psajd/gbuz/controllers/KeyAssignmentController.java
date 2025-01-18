@@ -6,7 +6,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.springframework.http.HttpStatus;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,22 +63,18 @@ public class KeyAssignmentController {
     }
 
     @GetMapping("/{id}/act")
-    public ResponseEntity<String> generateKeyAssignmentAct(@PathVariable Long id) {
+    public ResponseEntity<byte[]> generateKeyAssignmentAct(@PathVariable Long id) {
         Optional<KeyAssignment> keyAssignment = keyAssignmentService.getKeyAssignmentById(id);
+
         if (keyAssignment.isPresent()) {
             KeyAssignment assignment = keyAssignment.get();
-            String actContent = String.format(
-                    "Акт приема-передачи ключа\n\nДата передачи: %s\nСотрудник: %s\nКарта-ключ: %s\n\nПодписи сторон:\n___________\n___________",
-                    assignment.getAssignmentDate(),
-                    assignment.getCertificate().getEmployee().getFullName(),
-                    assignment.getKeyCard().getSerialNumber()
-            );
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=act-" + id + ".txt")
-                    .body(actContent);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            return keyAssignmentService.createDocx(id, assignment, formatter);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }
 
