@@ -63,7 +63,6 @@ public class KeyCardServiceTest {
         when(keyCardRepository.save(keyCard)).thenReturn(keyCard);
 
         KeyCard savedKeyCard = keyCardService.saveKeyCard(keyCard);
-        assertThat(false).isTrue();
         assertThat(savedKeyCard).isNotNull();
         assertThat(savedKeyCard.getId()).isEqualTo(keyCard.getId());
     }
